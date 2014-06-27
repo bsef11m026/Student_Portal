@@ -1,0 +1,92 @@
+﻿<link href="~/templatemo_style.css" rel="stylesheet" />
+@model project.Models.Post
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+        <div id="templatemo_main">
+                   
+        	<h1>Add_New_Post</h1>
+
+        <p><em>You can Add new Post By filling this. At end You required to enter yur User Id and Password to verify that you Are a valid User...Thnx..!</em></p>
+        <div class="cleaner_h50"></div>
+
+            <div id="contact_form">
+            
+                <h2>Add_Post_Form</h2>
+                
+                <div id="checking">Checking...</div>
+
+
+                
+                
+
+  @using (Html.BeginForm("save","Post",FormMethod.Post))
+{
+                    <input type="hidden"  id="hidden" name="post" value="Send" value="KKKKK"/>
+                     <label for="email">Post_Name:</label>  @Html.TextBoxFor(m => m.Name)
+                    <div id="result"></div>
+
+                    
+      @Scripts.Render("~/bundles/jquery")
+                            <script>
+
+                                $(document).ready(function () {
+
+                                    $('#checking').hide();
+
+                                    $('#b1').click(function () {
+
+                                        var userName = $('#Name').val();
+
+                                        //alert('User Name ='+ userName);
+                                        $('#checking').show();
+                                        $.getJSON("/post/CheckUserName?UserName=" + userName, function (data) {
+                                            $('#checking').hide();
+                                            if (data) {
+                                                $('#result').text("Unfortunatelly...! User already exists in database");
+
+                                            }
+                                            else {
+                                                $('#result').text("Good...* _User Name is available");
+                                            }
+                                        });
+
+                                    });
+
+                                });
+    </script>
+
+                    
+                    <div class="cleaner_h10"></div>
+                    
+                  
+                     
+                    
+                  
+                     <label for="text">Post_Content:</label>  @Html.TextAreaFor(m => m.Txt)
+                    <div class="cleaner_h10"></div>
+                    
+                     <label for="email">Material_URL</label>  @Html.TextBoxFor(m => m.Url)
+                    <div class="cleaner_h10"></div>
+      
+      
+    
+ 
+     
+ 
+  
+                    <input type="submit" class="submit_btn" name="submit" id="submit" value="SubmitPost" />
+                    <input type="reset" class="submit_btn" name="reset" id="reset" value="ResetFields" />
+                
+      
+      <div>
+    @Html.ActionLink("Back to the Home place", "Home/index")
+</div>
+  }
+            
+            </div> 
+        
+        </div> <!-- end of main -->
+        

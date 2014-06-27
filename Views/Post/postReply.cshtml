@@ -1,0 +1,32 @@
+﻿<link href="~/templatemo_style.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model project.Models.File
+<div id="templatemo_main">
+                
+            <h1>Post_Successfully_Added.</h1><br>   
+        	<h1>Congratulation...  :)  </h1>
+
+        <p style="font-family:arial;color:red;font-size:20px;"><em>You can see your post in all posts you can see comments .</em></p>
+        </div>
+
+
+
+<div class="cleaner_h10"></div>
+                    
+
+
+<form action="/Post/fileUploadReply " method="post" enctype="multipart/form-data" >
+
+    <label for="image">File_Upload:</label> <input type="file" name="f1" />
+<br> 
+<label for="image">File_Detail:</label>
+<br><textarea id="detail" name="text" rows="5" cols="18" class="required"></textarea>
+ 
+    <input type="submit" value="upload" />
+</form>
+
+                      

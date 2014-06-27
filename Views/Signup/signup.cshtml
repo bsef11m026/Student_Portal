@@ -1,0 +1,93 @@
+﻿<link href="~/templatemo_style.css" rel="stylesheet" />
+@model project.Models.user
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        <div id="templatemo_main">
+                   
+        	<h1>SignUp</h1>
+
+        <p><em>You can SignUp here.You need a Account for comment on a study post and Also for Uploading a File for Others. Use check Button For ID Available or Not..!</em></p>
+        <div class="cleaner_h50"></div>
+
+            <div id="contact_form">
+            
+                <h2>SignUp Form</h2>
+                
+                <div id="checking">Checking...</div>
+
+
+                
+                
+
+  @using (Html.BeginForm("save","signup",FormMethod.Post))
+{
+                    <input type="hidden"  id="hidden" name="post" value="Send" value="KKKKK"/>
+                    <label for="email">Name:</label>   @Html.TextBoxFor(m => m.author, new { name="author"}) 
+                        @Html.ValidationMessageFor(m => m.author)<input type="button" id="b1" value="Check" />
+                    <div id="result"></div>
+
+                    
+      @Scripts.Render("~/bundles/jquery")
+                            <script>
+
+                                $(document).ready(function () {
+
+                                    $('#checking').hide();
+
+                                    $('#b1').click(function () {
+
+                                        var userName = $('#author').val();
+
+                                        //alert('User Name ='+ userName);
+                                        $('#checking').show();
+                                        $.getJSON("/signup/CheckUserName?UserName=" + userName, function (data) {
+                                            $('#checking').hide();
+                                            if (data) {
+                                                $('#result').text("Unfortunatelly...! User already exists in database");
+
+                                            }
+                                            else {
+                                                $('#result').text("Good...* _User Name is available");
+                                            }
+                                        });
+
+                                    });
+
+                                });
+    </script>
+
+                    <div class="cleaner_h10"></div>
+                    
+                     <label for="password">password:</label>   @Html.TextBoxFor(m => m.password, new { type="password"})
+                    @Html.ValidationMessageFor(m => m.author)
+                    <div class="cleaner_h10"></div>
+                    
+                  
+                     <label for="email">Email:</label>   @Html.TextBoxFor(m => m.email)
+                       @Html.ValidationMessageFor(m => m.email)
+                    <div class="cleaner_h10"></div>
+                    
+                  
+                    <label for="text">Message:</label>   @Html.TextAreaFor(m => m.text)
+                    <div class="cleaner_h10"></div>
+                    
+                    <input type="submit" class="submit_btn" name="submit" id="submit" value="SignUp" />
+                    <input type="reset" class="submit_btn" name="reset" id="reset" value="Reset" />
+                
+      
+      <div>
+    @Html.ActionLink("Back to the Home place", "Home/index")
+</div>
+  }
+            
+            </div> 
+        
+        </div> <!-- end of main -->
+        
